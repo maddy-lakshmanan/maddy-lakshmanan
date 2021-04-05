@@ -16,6 +16,10 @@ class Employee:
         self.pay=pay
         Employee.num_of_employees += 1;
 
+    def __del__(self):
+      # body of destructor
+      print("Destructor called",self)
+
     def fullName(self):
         return '{} {} '.format(self.firstName,self.lastName)
 
@@ -37,28 +41,40 @@ class Employee:
         if(pay>50000):
             return True
 
+class Developer(Employee):
+    def __init__(self,firstName,lastName,pay,program):
+        super().__init__(firstName,lastName,pay)
+        self.program = program    
+class Manager(Employee):
+    def __init__(self,firstName,lastName,pay,employees=None):
+        super().__init__(firstName,lastName,pay)
+        self.employees = employees
+    # def add_emp   
+
 emp1 = Employee('Maddy','Lakshmanan',200000)
 emp2 = Employee('Divya', 'Maddy',200000)
-
-
-
-print(emp1.fullName())
-print(Employee.fullName(emp1)) #Another way to invoke a object method
-
-emp1.apply_raise()
-print(emp1.__dict__) #This is similar to toString method in java. It prints the entire dictionary of the object
-
-print("Number of employees -" , Employee.num_of_employees);
-
-#calling class method
-Employee.update_raise(1.05)
-emp2.apply_raise()
-print(emp2.__dict__)
-
-#calling class method to create constructor
+# calling class method to create constructor
 emp3 = Employee.from_emp_string('Nivedha-Maddy-500000')
-print(emp3.fullName())
+dev1 = Developer('Maya','Maddy',500000,'Java')
 
-#calling static method
-print(Employee.isHighPaid(emp1.pay))
+# print(emp1.fullName())
+# print(Employee.fullName(emp1)) #Another way to invoke a object method
+
+# emp1.apply_raise()
+# print(emp1.__dict__) #This is similar to toString method in java. It prints the entire dictionary of the object
+
+# print("Number of employees -" , Employee.num_of_employees);
+
+# #calling class method
+# Employee.update_raise(1.05)
+# emp2.apply_raise()
+# print(emp2.__dict__)
+
+# print(emp3.fullName())
+
+# #calling static method
+# print(Employee.isHighPaid(emp1.pay))
+
+# calling parent constructor
+print(dev1.fullName())
         
